@@ -12,7 +12,7 @@ const SearchBar = () => {
       <FontAwesomeIcon
         icon={faMagnifyingGlass}
         size='xs'
-        className='grow-0 px-1'
+        className='grow-0 px-1 text-slate-600'
       />
       <input
         type='text'
