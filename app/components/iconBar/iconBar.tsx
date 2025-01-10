@@ -6,7 +6,7 @@ import MessageIcon from '@/components/messgaeIcon/messageIcon';
 
 const IconBar = () => {
   return (
-    <ul className='flex justify-end w-80'>
+    <ul className='flex justify-end w-80 pr-2'>
       <NotificationIcon />
       <MessageIcon />
       <SettingsIcon />
