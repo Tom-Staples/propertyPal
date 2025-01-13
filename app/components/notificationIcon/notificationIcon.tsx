@@ -25,12 +25,7 @@ const NotificationIcon = () => {
   return (
     <li className='px-4 hover:scale-110 hover:opacity-80'>
       <span className='fa-layers'>
-        <FontAwesomeIcon
-          icon={faBell}
-          size='2xl'
-          className='text-slate-600'
-          title='Test'
-        />
+        <FontAwesomeIcon icon={faBell} size='2xl' className='text-slate-600' />
         {overlay}
         <NotificationCounter
           styleMap={[

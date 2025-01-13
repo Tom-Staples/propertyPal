@@ -29,7 +29,6 @@ const MessageIcon = () => {
           icon={faMessage}
           size='2xl'
           className='text-slate-600'
-          title='Test'
         />
         {overlay}
         <NotificationCounter
