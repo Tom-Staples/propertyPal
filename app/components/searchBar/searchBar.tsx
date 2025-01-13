@@ -17,7 +17,7 @@ const SearchBar = () => {
       <input
         type='text'
         placeholder='Find something'
-        className=' grow rounded-r-md outline-none'
+        className=' grow rounded-r-md outline-none p-2'
         onFocus={() => {
           setFocusClass('border-orange-300');
         }}
