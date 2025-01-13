@@ -4,7 +4,7 @@ import IconBar from '@/components/iconBar';
 
 const Header = () => {
   return (
-    <header className='h-16 border-b-2 border-slate-200 p-2 flex justify-between items-center'>
+    <header className='h-16 p-2 flex justify-between items-center col-span-9'>
       <SearchBar />
       <IconBar />
     </header>
