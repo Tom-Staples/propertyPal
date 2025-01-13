@@ -19,10 +19,12 @@ const NavBar = () => {
 
   return (
     <nav className='order-first col-span-1 row-span-2 h-screen bg-orange-300 pt-2 text-slate-600 font-bold flex flex-col'>
-      <Link href='/' className='self-center'>
-        <Image src={logo} alt='property pal' />
-      </Link>
-      <ul className='flex flex-col mt-10 pl-2'>
+      <ul className='flex flex-col pl-2'>
+        <li className='self-center mb-6'>
+          <Link href='/'>
+            <Image src={logo} alt='property pal' />
+          </Link>
+        </li>
         <li className={listStyling}>
           <Link href='/'>
             <FontAwesomeIcon
