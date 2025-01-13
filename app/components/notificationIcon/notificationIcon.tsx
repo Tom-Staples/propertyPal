@@ -23,22 +23,20 @@ const NotificationIcon = () => {
   );
 
   return (
-    <li className='px-4 hover:scale-110 hover:opacity-80'>
-      <span className='fa-layers'>
-        <FontAwesomeIcon icon={faBell} size='2xl' className='text-slate-600' />
-        {overlay}
-        <NotificationCounter
-          styleMap={[
-            '',
-            'text-sm left-2.5 -bottom-1',
-            'text-sm left-1.5 -bottom-1',
-            'text-xs left-1 -bottom-1',
-            'text-[9px] left-1 -bottom-1'
-          ]}
-          count={derivedCountDisplayValue}
-        />
-      </span>
-    </li>
+    <span className='fa-layers'>
+      <FontAwesomeIcon icon={faBell} size='2xl' className='text-slate-600' />
+      {overlay}
+      <NotificationCounter
+        styleMap={[
+          '',
+          'text-sm left-2.5 -bottom-1',
+          'text-sm left-1.5 -bottom-1',
+          'text-xs left-1 -bottom-1',
+          'text-[9px] left-1 -bottom-1'
+        ]}
+        count={derivedCountDisplayValue}
+      />
+    </span>
   );
 };
 
