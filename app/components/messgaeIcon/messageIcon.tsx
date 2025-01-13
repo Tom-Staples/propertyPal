@@ -2,7 +2,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-solid-svg-icons';
-import NotificationCounter from '@/components/notificationCounter/notificationCounter';
+import NotificationCounter from '@/components/notificationCounter';
 import useGetNotificationCounter from 'hooks/useGetNotificationCounter';
 import getIconOverlay from 'helpers/getIconOverlay';
 

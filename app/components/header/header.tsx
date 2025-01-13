@@ -1,6 +1,6 @@
 import React from 'react';
-import SearchBar from '@/components/searchBar/searchBar';
-import IconBar from '@/components/iconBar/iconBar';
+import SearchBar from '@/components/searchBar';
+import IconBar from '@/components/iconBar';
 
 const Header = () => {
   return (

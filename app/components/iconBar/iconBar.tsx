@@ -1,8 +1,8 @@
 import React from 'react';
-import NotificationIcon from '@/components/notificationIcon/notificationIcon';
-import SettingsIcon from '@/components/settingsIcon/settingsIcon';
-import AddPropertyIcon from '@/components/addPropertyIcon/addPropertyIcon';
-import MessageIcon from '@/components/messgaeIcon/messageIcon';
+import NotificationIcon from '@/components/notificationIcon';
+import SettingsIcon from '@/components/settingsIcon';
+import AddPropertyIcon from '@/components/addPropertyIcon';
+import MessageIcon from '@/components/messgaeIcon';
 
 const IconBar = () => {
   return (
