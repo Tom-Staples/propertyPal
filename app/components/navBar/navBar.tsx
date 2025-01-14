@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,77 +13,71 @@ import MessageIcon from '@/components/messgaeIcon';
 import NotificationIcon from '@/components/notificationIcon';
 import Image from 'next/image';
 import logo from '@public/logo.png';
+import { usePathname } from 'next/navigation';
 
 const NavBar = () => {
-  const listStyling: string = 'py-4 hover:scale-105 hover:opacity-90';
+  const listStyling: string =
+    'py-4 mb-2 px-2 hover:scale-105 hover:bg-orange-200 rounded-l-lg';
   const iconStyling: string = 'mr-2 text-slate-600 w-10';
+  const activeLinkStyling: string = 'bg-slate-50 rounded-l-lg';
+  const currentPath: string = usePathname();
+  const regularLinks: React.JSX.Element[] = [
+    { link: '/', name: 'Overview', icon: faGripVertical },
+    { link: '/properties', name: 'Properties', icon: faHouse },
+    { link: '/tenants', name: 'Tenants', icon: faPeopleRoof },
+    { link: '/analytics', name: 'Analytics', icon: faChartLine }
+  ].map(({ link, name, icon }) => (
+    <Link href={link} key={name}>
+      <li
+        className={`${listStyling} ${
+          currentPath === link ? activeLinkStyling : ''
+        }`}
+      >
+        <FontAwesomeIcon icon={icon} size='2xl' className={iconStyling} />
+        {name}
+      </li>
+    </Link>
+  ));
 
   return (
-    <nav className='order-first col-span-1 row-span-2 h-screen bg-orange-300 pt-2 text-slate-600 font-bold flex flex-col'>
-      <ul className='flex flex-col pl-2'>
+    <nav className='order-first col-span-1 row-span-12 bg-orange-300 pt-2 text-slate-600 font-bold flex flex-col'>
+      <ul className='flex flex-col pl-2 grow'>
         <li className='self-center mb-6'>
           <Link href='/'>
             <Image src={logo} alt='property pal' />
           </Link>
         </li>
-        <li className={listStyling}>
-          <Link href='/'>
-            <FontAwesomeIcon
-              icon={faGripVertical}
-              size='2xl'
-              className={iconStyling}
-            />
-            Overview
-          </Link>
-        </li>
-        <li className={listStyling}>
-          <Link href='properties'>
-            <FontAwesomeIcon
-              icon={faHouse}
-              size='2xl'
-              className={iconStyling}
-            />
-            Properties
-          </Link>
-        </li>
-        <li className={listStyling}>
-          <Link href='tenants'>
-            <FontAwesomeIcon
-              icon={faPeopleRoof}
-              size='2xl'
-              className={iconStyling}
-            />
-            Tenants
-          </Link>
-        </li>
-        <li className={listStyling}>
-          <Link href='analytics'>
-            <FontAwesomeIcon
-              icon={faChartLine}
-              size='2xl'
-              className={iconStyling}
-            />
-            Analytics
-          </Link>
-        </li>
-        <li className={listStyling}>
-          <Link href='issues'>
+        {regularLinks}
+        <Link href='issues'>
+          <li
+            className={`${listStyling} ${
+              currentPath === '/issues' ? activeLinkStyling : ''
+            }`}
+          >
             <NotificationIcon />
             <span className='ml-8'>Issues</span>
-          </Link>
-        </li>
-        <li className={`${listStyling}`}>
-          <Link href='messages'>
+          </li>
+        </Link>
+        <Link href='messages'>
+          <li
+            className={`${listStyling} ${
+              currentPath === '/messages' ? activeLinkStyling : ''
+            }`}
+          >
             <MessageIcon />
             <span className='ml-8'>Messages</span>
-          </Link>
-        </li>
-        <li className={`${listStyling} absolute bottom-2`}>
-          <Link href='settings'>
+          </li>
+        </Link>
+        <Link href='settings'>
+          <li
+            className={`${listStyling} ${
+              currentPath === '/settings' ? activeLinkStyling : ''
+            } absolute bottom-2 w-[178px]`}
+          >
             <FontAwesomeIcon icon={faGear} size='2xl' className={iconStyling} />
             Settings
-          </Link>
-        </li>
+          </li>
+        </Link>
       </ul>
     </nav>
   );
