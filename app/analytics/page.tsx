@@ -1,9 +1,8 @@
-import Header from '@/components/header/header';
+import React from 'react';
+import Header from '@/components/header';
 import NavBar from '@/components/navBar';
 
-import React from 'react';
-
-const HomePage = () => {
+const AnalyticsPage = () => {
   return (
     <div className='grid grid-rows-2 grid-cols-10'>
       <Header />
@@ -12,4 +11,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default AnalyticsPage;
