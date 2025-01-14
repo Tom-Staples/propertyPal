@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import Header from '@/components/header';
+import NavBar from '@/components/navBar';
 
 export const metadata: Metadata = {
   title: 'Property-Pal',
@@ -15,7 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body>{children}</body>
+      <body className='grid grid-rows-2 grid-cols-10'>
+        <Header />
+        <NavBar />
+        {children}
+      </body>
     </html>
   );
 }
