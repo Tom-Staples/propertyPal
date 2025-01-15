@@ -4,25 +4,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 const SearchBar = () => {
-  const [focusClass, setFocusClass] = useState<string>('border-slate-200');
+  const [focusClass, setFocusClass] = useState<string>(
+    'border-white md:border-slate-200'
+  );
   const [searchValue, setsearchValue] = useState<string>('');
 
   return (
-    <div className={`w-80 rounded-md border-2 flex items-center ${focusClass}`}>
+    <div
+      className={`flex bg-white w-60 sm:w-80 border-2 rounded-md items-center ${focusClass}`}
+    >
       <FontAwesomeIcon
         icon={faMagnifyingGlass}
         size='xs'
-        className='grow-0 px-1 text-slate-600'
+        className='px-1 text-slate-600'
       />
       <input
         type='text'
         placeholder='Find something'
-        className=' grow rounded-r-md outline-none p-2'
+        className='w-36 sm:w-auto rounded-r-md outline-none p-2'
         onFocus={() => {
-          setFocusClass('border-orange-300');
+          setFocusClass('border-slate-600 md:border-orange-300');
         }}
         onBlur={() => {
-          setFocusClass('border-slate-200');
+          setFocusClass('border-white md:border-slate-200');
         }}
         onChange={e => {
           setsearchValue(e.target.value);

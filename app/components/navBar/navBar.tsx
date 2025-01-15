@@ -40,11 +40,11 @@ const NavBar = () => {
   ));
 
   return (
-    <nav className='order-first col-span-1 row-span-12 bg-orange-300 pt-2 text-slate-600 font-bold flex flex-col'>
-      <ul className='flex flex-col pl-2 grow'>
+    <nav className='hidden md:flex flex-col order-first md:col-span-2 xl:col-span-1 row-span-12 bg-orange-300 pt-2 text-slate-600 font-bold'>
+      <ul className='flex flex-col grow'>
         <li className='self-center mb-6'>
           <Link href='/'>
-            <Image src={logo} alt='property pal' />
+            <Image src={logo} alt='property pal' height={100} width={100} />
           </Link>
         </li>
         {regularLinks}
@@ -68,11 +68,11 @@ const NavBar = () => {
             <span className='ml-8'>Messages</span>
           </li>
         </Link>
-        <Link href='settings'>
+        <Link href='settings' className='mt-auto'>
           <li
             className={`${listStyling} ${
               currentPath === '/settings' ? activeLinkStyling : ''
-            } absolute bottom-2 w-[178px]`}
+            }`}
           >
             <FontAwesomeIcon icon={faGear} size='2xl' className={iconStyling} />
             Settings
