@@ -10,7 +10,7 @@ const IconBar = () => {
       </li>
       <li className='hidden md:block px-4 hover:scale-105 hover:opacity-90 py-2 rounded-lg bg-orange-300'>
         <AddPropertyIcon />
-        <span className='ml-8'>Add new property</span>
+        <span className='ml-6'>Add new property</span>
       </li>
     </ul>
   );

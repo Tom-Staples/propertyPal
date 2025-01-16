@@ -14,9 +14,9 @@ const NotificationIcon = () => {
     !count || count === -1 ? '' : count.toString();
   const overlay: React.JSX.Element | undefined = getIconOverlay(
     {
-      spinner: 'right-8 up-2',
-      exclamation: 'right-8 up-2',
-      circle: 'shrink-2 right-18 up-12'
+      spinner: 'right-3 up-1',
+      exclamation: 'right-4 up-1',
+      circle: 'shrink-6 right-11 up-10'
     },
     count,
     derivedCountDisplayValue
@@ -24,15 +24,15 @@ const NotificationIcon = () => {
 
   return (
     <span className='fa-layers'>
-      <FontAwesomeIcon icon={faBell} size='2xl' className='text-slate-600' />
+      <FontAwesomeIcon icon={faBell} size='xl' className='text-slate-600' />
       {overlay}
       <NotificationCounter
         styleMap={[
           '',
-          'text-sm left-2.5 -bottom-1',
-          'text-sm left-1.5 -bottom-1',
-          'text-xs left-1 -bottom-1',
-          'text-[9px] left-1 -bottom-1'
+          'text-sm left-1.5 -bottom-0.5',
+          'text-[12px] left-1 -bottom-0.5',
+          'text-[10px] left-0.5 -bottom-0.5',
+          'text-[8px] left-0.5 -bottom-0.5'
         ]}
         count={derivedCountDisplayValue}
       />

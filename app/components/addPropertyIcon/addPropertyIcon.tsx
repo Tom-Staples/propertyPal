@@ -7,7 +7,7 @@ const AddPropertyIcon = () => {
     <span className='fa-layers'>
       <FontAwesomeIcon
         icon={faHouseMedical}
-        size='2xl'
+        size='xl'
         className='text-slate-600'
       />
     </span>

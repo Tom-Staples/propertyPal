@@ -33,7 +33,7 @@ const NavBar = () => {
           currentPath === link ? activeLinkStyling : ''
         }`}
       >
-        <FontAwesomeIcon icon={icon} size='2xl' className={iconStyling} />
+        <FontAwesomeIcon icon={icon} size='xl' className={iconStyling} />
         {name}
       </li>
     </Link>
@@ -74,7 +74,7 @@ const NavBar = () => {
               currentPath === '/settings' ? activeLinkStyling : ''
             }`}
           >
-            <FontAwesomeIcon icon={faGear} size='2xl' className={iconStyling} />
+            <FontAwesomeIcon icon={faGear} size='xl' className={iconStyling} />
             Settings
           </li>
         </Link>

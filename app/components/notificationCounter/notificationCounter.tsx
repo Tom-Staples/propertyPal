@@ -1,9 +1,9 @@
 import React from 'react';
 
 /*
-    Component to display the number of messages / issues on the appropriate icons.
-    Custom styling will be applied dependent on the value of the counter
-*/
+ *   Component to display the number of messages / issues on the appropriate icons.
+ *   Custom styling will be applied dependent on the value of the counter
+ */
 const NotificationCounter = ({
   styleMap,
   count
