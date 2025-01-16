@@ -18,7 +18,8 @@ interface OverlayTransform {
 export default function getIconOverlay(
   transform: OverlayTransform,
   count: number | null,
-  countDisplay: string
+  countDisplay: string,
+  colour: string
 ): React.JSX.Element | undefined {
   const loading: boolean = count === null;
   const fetchError: boolean = count === -1;
@@ -29,7 +30,7 @@ export default function getIconOverlay(
         icon={faSpinner}
         spin
         size='xs'
-        className='text-white'
+        className={colour}
         transform={transform.spinner}
       />
     );
@@ -39,7 +40,7 @@ export default function getIconOverlay(
       <FontAwesomeIcon
         icon={faCircleExclamation}
         size='xs'
-        className='text-white'
+        className={colour}
         transform={transform.exclamation}
       />
     );
