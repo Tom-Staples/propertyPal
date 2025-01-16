@@ -40,7 +40,7 @@ const NavBar = () => {
   ));
 
   return (
-    <nav className='hidden md:flex flex-col order-first md:col-span-2 xl:col-span-1 row-span-12 bg-orange-300 pt-2 text-slate-600 font-bold'>
+    <nav className='hidden md:flex flex-col order-first md:col-span-3 lg:col-span-2 xl:col-span-1 row-span-12 bg-orange-300 pt-2 text-slate-600 font-bold'>
       <ul className='flex flex-col grow'>
         <li className='self-center mb-6'>
           <Link href='/'>

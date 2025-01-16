@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body>
-        <div className='grid grid-rows-12 grid-cols-1 md:grid-cols-10 gap-x-2 h-screen bg-slate-50'>
+        <div className='grid grid-rows-12 grid-cols-1 md:grid-cols-12 xl:grid-cols-10 gap-x-2 h-screen bg-slate-50'>
           <Header />
           {children}
         </div>
