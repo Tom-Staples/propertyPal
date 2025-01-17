@@ -29,7 +29,13 @@ const NavBar = () => {
       <ul className='flex flex-col grow'>
         <li className='self-center mb-6'>
           <Link href='/'>
-            <Image src={logo} alt='property pal' height={100} width={100} />
+            <Image
+              src={logo}
+              alt='property pal'
+              height={100}
+              width={100}
+              priority={true}
+            />
           </Link>
         </li>
         {regularLinks}
