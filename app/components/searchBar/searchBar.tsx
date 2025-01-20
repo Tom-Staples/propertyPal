@@ -21,7 +21,7 @@ const SearchBar = () => {
       <input
         type='text'
         placeholder='Find something'
-        className='w-32 sm:w-auto rounded-r-md outline-none p-2'
+        className='w-32 text-sm sm:text-base sm:w-auto rounded-r-md outline-none p-2'
         onFocus={() => {
           setFocusClass('border-slate-600 md:border-orange-300');
         }}
