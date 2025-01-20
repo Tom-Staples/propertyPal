@@ -12,9 +12,12 @@ export default function useGetNotificationCounter(url: string): number | null {
         //   throw response;
         // }
         // setCount(Number(response.text));
-
+        const rand = Math.round(Math.random() * 99);
+        if (rand === 44) {
+          throw 'Get in there Lewis!';
+        }
         setTimeout(() => {
-          setCount(44);
+          setCount(rand);
         }, 2000);
       } catch (error) {
         console.error(error);
