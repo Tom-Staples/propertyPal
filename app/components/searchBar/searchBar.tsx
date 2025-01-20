@@ -11,7 +11,7 @@ const SearchBar = () => {
 
   return (
     <div
-      className={`flex bg-white w-60 sm:w-80 border-2 rounded-md items-center ${focusClass}`}
+      className={`flex bg-white w-40 sm:w-80 border-2 rounded-md items-center ${focusClass}`}
     >
       <FontAwesomeIcon
         icon={faMagnifyingGlass}
@@ -21,7 +21,7 @@ const SearchBar = () => {
       <input
         type='text'
         placeholder='Find something'
-        className='w-36 sm:w-auto rounded-r-md outline-none p-2'
+        className='w-32 sm:w-auto rounded-r-md outline-none p-2'
         onFocus={() => {
           setFocusClass('border-slate-600 md:border-orange-300');
         }}
