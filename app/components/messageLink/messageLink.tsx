@@ -7,7 +7,11 @@ import { faMessage } from '@fortawesome/free-solid-svg-icons';
 import useGetNotificationCounter from 'hooks/useGetNotificationCounter';
 import getIconOverlay from 'helpers/getIconOverlay';
 
-const MessageLink = () => {
+const MessageLink = ({
+  setSideBarState = null
+}: {
+  setSideBarState?: React.Dispatch<React.SetStateAction<boolean>> | null;
+}) => {
   const currentPath: string = usePathname();
   const messageCount: number | null = useGetNotificationCounter(
     'https://fakeData.com/fakeroutenotifs'
@@ -26,11 +30,18 @@ const MessageLink = () => {
   );
 
   return (
-    <Link href='messages'>
+    <Link
+      href='messages'
+      onClick={() => {
+        if (setSideBarState) {
+          setSideBarState(false);
+        }
+      }}
+    >
       <li
         className={`${
-          currentPath === '/messages' && 'bg-slate-50 rounded-l-lg'
-        } py-4 mb-2 pl-1 hover:scale-105 hover:bg-orange-200 rounded-l-lg`}
+          currentPath === '/messages' && 'bg-slate-50'
+        } py-2 md:py-4 my-2 md:my-0 mr-6 md:mr-0 md:mb-2 pl-2 md:pl-1 md:hover:scale-105 md:hover:bg-orange-200 rounded-r-lg md:rounded-r-none md:rounded-l-lg`}
       >
         <span className='fa-layers'>
           <FontAwesomeIcon
@@ -40,7 +51,7 @@ const MessageLink = () => {
           />
           {messageOverlay}
         </span>
-        <span className='ml-4 xl:ml-4'>Messages</span>
+        <span className='ml-6 md:ml-4 xl:ml-4'>Messages</span>
         <span
           className={`${
             !derivedMessageCountDisplayValue && 'hidden'

@@ -7,7 +7,11 @@ import { usePathname } from 'next/navigation';
 import useGetNotificationCounter from 'hooks/useGetNotificationCounter';
 import getIconOverlay from 'helpers/getIconOverlay';
 
-const IssueLink = () => {
+const IssueLink = ({
+  setSideBarState = null
+}: {
+  setSideBarState?: React.Dispatch<React.SetStateAction<boolean>> | null;
+}) => {
   const currentPath: string = usePathname();
   const issueCount: number | null = useGetNotificationCounter(
     'https://fakeapi.com/fakeroute'
@@ -26,11 +30,18 @@ const IssueLink = () => {
   );
 
   return (
-    <Link href='issues'>
+    <Link
+      href='issues'
+      onClick={() => {
+        if (setSideBarState) {
+          setSideBarState(false);
+        }
+      }}
+    >
       <li
         className={`${
-          currentPath === '/issues' && 'bg-slate-50 rounded-l-lg'
-        } py-4 mb-2 pl-1 hover:scale-105 hover:bg-orange-200 rounded-l-lg`}
+          currentPath === '/issues' && 'bg-slate-50'
+        } py-2 md:py-4 md:mb-2 my-2 md:my-0 mr-6 md:mr-0 pl-2 md:pl-1 md:hover:scale-105 md:hover:bg-orange-200 rounded-r-lg md:rounded-r-none md:rounded-l-lg`}
       >
         <span className='fa-layers'>
           <FontAwesomeIcon
@@ -44,7 +55,7 @@ const IssueLink = () => {
         <span
           className={`${
             !derivedIssueDisplayValue && 'hidden'
-          } p-[5px] ml-7 xl:ml-6 text-sm text-white bg-slate-600 rounded-full`}
+          } p-[5px] ml-8 md:ml-7 xl:ml-6 text-sm text-white bg-slate-600 rounded-full`}
         >
           {derivedIssueDisplayValue}
         </span>
