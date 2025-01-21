@@ -8,13 +8,16 @@ const BreadcrumbBar = () => {
   const breadCrumbs: string[] = currentPath.split('/');
   breadCrumbs.shift();
   const breadCrumbLinks: React.JSX.Element[] = breadCrumbs.map((bc, index) => {
+    const previousCrumbs: string = breadCrumbs.slice(0, index).join('/');
     const isDashboard: boolean = bc === 'dashboard';
+    const capitalizedCrumb: string = bc
+      .split('-')
+      .map(link => link.substring(0, 1).toUpperCase() + link.substring(1))
+      .join(' ');
     return (
       <li key={bc} className='mr-2'>
-        <Link href={`/${isDashboard ? bc : `dashboard/${bc}`}`}>
-          {isDashboard
-            ? 'Overview'
-            : bc.substring(0, 1).toUpperCase() + bc.substring(1)}
+        <Link href={`/${previousCrumbs ? `${previousCrumbs}/${bc}` : bc}`}>
+          {isDashboard ? 'Overview' : capitalizedCrumb}
         </Link>
         <span className='text-slate-600'>{`${
           index === breadCrumbs.length - 1 ? '' : ' > '
