@@ -19,10 +19,10 @@ import IssueLink from '../issueLink';
 const HamburgerMenu = () => {
   const [sideBarActive, setSideBarActive] = useState<boolean>(false);
   const links = [
-    { link: '/', name: 'Overview', icon: faGripVertical },
-    { link: '/properties', name: 'Properties', icon: faHouse },
-    { link: '/tenants', name: 'Tenants', icon: faPeopleRoof },
-    { link: '/analytics', name: 'Analytics', icon: faChartLine }
+    { link: '/dashboard', name: 'Overview', icon: faGripVertical },
+    { link: '/dashboard/properties', name: 'Properties', icon: faHouse },
+    { link: '/dashboard/tenants', name: 'Tenants', icon: faPeopleRoof },
+    { link: '/dashboard/analytics', name: 'Analytics', icon: faChartLine }
   ].map(({ link, name, icon }) => (
     <HamburgerLink
       link={link}
@@ -67,7 +67,7 @@ const HamburgerMenu = () => {
           <IssueLink setSideBarState={setSideBarActive} />
           <MessageLink setSideBarState={setSideBarActive} />
           <HamburgerLink
-            link='/settings'
+            link='/dashboard/settings'
             name='Settings'
             icon={faGear}
             setSideBarState={setSideBarActive}

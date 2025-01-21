@@ -16,10 +16,10 @@ import IssueLink from '../issueLink';
 const NavBar = () => {
   // Mapped links with same styling / format
   const regularLinks: React.JSX.Element[] = [
-    { link: '/', name: 'Overview', icon: faGripVertical },
-    { link: '/properties', name: 'Properties', icon: faHouse },
-    { link: '/tenants', name: 'Tenants', icon: faPeopleRoof },
-    { link: '/analytics', name: 'Analytics', icon: faChartLine }
+    { link: '/dashboard', name: 'Overview', icon: faGripVertical },
+    { link: '/dashboard/properties', name: 'Properties', icon: faHouse },
+    { link: '/dashboard/tenants', name: 'Tenants', icon: faPeopleRoof },
+    { link: '/dashboard/analytics', name: 'Analytics', icon: faChartLine }
   ].map(({ link, name, icon }) => (
     <NavBarLink link={link} name={name} icon={icon} key={name} />
   ));
@@ -28,7 +28,7 @@ const NavBar = () => {
     <nav className='hidden md:flex flex-col order-first md:col-span-3 lg:col-span-2 xl:col-span-1 row-span-12 bg-orange-300 pt-2 text-slate-600 font-bold lg:max-w-56'>
       <ul className='flex flex-col grow'>
         <li className='self-center mb-6'>
-          <Link href='/'>
+          <Link href='/dashboard'>
             <Image
               src={logo}
               alt='property pal'
@@ -41,7 +41,7 @@ const NavBar = () => {
         {regularLinks}
         <IssueLink />
         <MessageLink />
-        <NavBarLink link='/settings' name='Settings' icon={faGear} />
+        <NavBarLink link='/dashboard/settings' name='Settings' icon={faGear} />
       </ul>
     </nav>
   );

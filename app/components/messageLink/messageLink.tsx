@@ -31,7 +31,7 @@ const MessageLink = ({
 
   return (
     <Link
-      href='messages'
+      href='/dashboard/messages'
       onClick={() => {
         if (setSideBarState) {
           setSideBarState(false);
@@ -40,7 +40,7 @@ const MessageLink = ({
     >
       <li
         className={`${
-          currentPath === '/messages' && 'bg-slate-50'
+          currentPath === '/dashboard/messages' && 'bg-slate-50'
         } py-2 md:py-4 my-2 md:my-0 mr-6 md:mr-0 md:mb-2 pl-2 md:pl-1 md:hover:scale-105 md:hover:bg-orange-200 rounded-r-lg md:rounded-r-none md:rounded-l-lg`}
       >
         <span className='fa-layers'>
