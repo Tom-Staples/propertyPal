@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-solid-svg-icons';
 import useGetNotificationCounter from 'hooks/useGetNotificationCounter';
 import getIconOverlay from 'helpers/getIconOverlay';
+import isLinkActive from 'helpers/isLinkActive';
 
 const MessageLink = ({
   setSideBarState = null
@@ -13,6 +14,8 @@ const MessageLink = ({
   setSideBarState?: React.Dispatch<React.SetStateAction<boolean>> | null;
 }) => {
   const currentPath: string = usePathname();
+  const link: string = '/dashboard/messages';
+  const linkActive: boolean = isLinkActive(currentPath, link);
   const messageCount: number | null = useGetNotificationCounter(
     'https://fakeData.com/fakeroutenotifs'
   );
@@ -31,7 +34,7 @@ const MessageLink = ({
 
   return (
     <Link
-      href='/dashboard/messages'
+      href={link}
       onClick={() => {
         if (setSideBarState) {
           setSideBarState(false);
@@ -40,7 +43,7 @@ const MessageLink = ({
     >
       <li
         className={`${
-          currentPath === '/dashboard/messages' && 'bg-slate-50'
+          linkActive && 'bg-slate-50'
         } py-2 md:py-4 my-2 md:my-0 mr-6 md:mr-0 md:mb-2 pl-2 md:pl-1 md:hover:scale-105 md:hover:bg-orange-200 rounded-r-lg md:rounded-r-none md:rounded-l-lg`}
       >
         <span className='fa-layers'>

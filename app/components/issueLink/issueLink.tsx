@@ -6,6 +6,7 @@ import { faScrewdriverWrench } from '@fortawesome/free-solid-svg-icons';
 import { usePathname } from 'next/navigation';
 import useGetNotificationCounter from 'hooks/useGetNotificationCounter';
 import getIconOverlay from 'helpers/getIconOverlay';
+import isLinkActive from 'helpers/isLinkActive';
 
 const IssueLink = ({
   setSideBarState = null
@@ -13,6 +14,8 @@ const IssueLink = ({
   setSideBarState?: React.Dispatch<React.SetStateAction<boolean>> | null;
 }) => {
   const currentPath: string = usePathname();
+  const link: string = '/dashboard/issues';
+  const linkActive = isLinkActive(currentPath, link);
   const issueCount: number | null = useGetNotificationCounter(
     'https://fakeapi.com/fakeroute'
   );
@@ -31,7 +34,7 @@ const IssueLink = ({
 
   return (
     <Link
-      href='/dashboard/issues'
+      href={link}
       onClick={() => {
         if (setSideBarState) {
           setSideBarState(false);
@@ -40,7 +43,7 @@ const IssueLink = ({
     >
       <li
         className={`${
-          currentPath === '/dashboard/issues' && 'bg-slate-50'
+          linkActive && 'bg-slate-50'
         } py-2 md:py-4 md:mb-2 my-2 md:my-0 mr-6 md:mr-0 pl-2 md:pl-1 md:hover:scale-105 md:hover:bg-orange-200 rounded-r-lg md:rounded-r-none md:rounded-l-lg`}
       >
         <span className='fa-layers'>
