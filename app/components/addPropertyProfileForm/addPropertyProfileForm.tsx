@@ -8,6 +8,9 @@ import {
   PropertyProfile,
   SectionName
 } from 'dashboard/properties/add-property/page';
+import validateSelectInput from 'validationFunctions/validateSelectInput';
+import validateNumberOnlyInput from 'validationFunctions/validateNumberOnlyInput';
+import validateImageUpload from 'validationFunctions/validateImageUpload';
 
 const AddPropertyProfileForm = ({
   profileInfo,
@@ -57,6 +60,7 @@ const AddPropertyProfileForm = ({
       }`}
     >
       <button
+        type='button'
         onClick={() => {
           handleTagClick(tag);
         }}
@@ -104,7 +108,13 @@ const AddPropertyProfileForm = ({
           accept='image/*'
           type='file'
           ref={fileUploadRef}
-          onChange={handleFileChange}
+          onChange={e => {
+            const valid = validateImageUpload(e.target.value);
+
+            if (valid) {
+              handleFileChange(e);
+            }
+          }}
           className='hidden'
         />
       </label>
@@ -114,9 +124,23 @@ const AddPropertyProfileForm = ({
         <select
           name='type'
           id='type'
+          required
           value={profileInfo.type}
           onChange={e => {
-            handleChange(e, 'profile');
+            const valid: boolean = validateSelectInput(e.target.value, [
+              'default',
+              'detachedHouse',
+              'semiDetachedHouse',
+              'terracedHouse',
+              'apartment',
+              'bungalow',
+              'cottage',
+              'commercial',
+              'industrial'
+            ]);
+            if (valid) {
+              handleChange(e, 'profile');
+            }
           }}
           onFocus={e => {
             handleFocusState(e, true, 'profile');
@@ -126,7 +150,7 @@ const AddPropertyProfileForm = ({
           }}
           className={`${
             profileActive.type && 'border-orange-300 border-2'
-          } mt-2 w-full outline-none p-2 rounded text-center shadow-lg bg-slate-50`}
+          } mt-2 w-full outline-none p-2 rounded text-center shadow-lg shadow-orange-300 bg-slate-50`}
         >
           <option value='default'>Please Select</option>
           <option value='detachedHouse'>Detached House</option>
@@ -142,14 +166,20 @@ const AddPropertyProfileForm = ({
       <label htmlFor='bedrooms' className='mb-10'>
         <span className='text-red-400'>*</span>Number of bedrooms:
         <input
-          type='number'
+          type='text'
           name='bedrooms'
           id='bedrooms'
+          maxLength={2}
+          required
           className={`${inputStyling} ${
             profileActive.bedrooms && 'border-orange-300'
           }`}
           onChange={e => {
-            handleChange(e, 'profile');
+            const valid = validateNumberOnlyInput(e.target.value);
+
+            if (valid) {
+              handleChange(e, 'profile');
+            }
           }}
           onFocus={e => {
             handleFocusState(e, true, 'profile');
@@ -163,14 +193,20 @@ const AddPropertyProfileForm = ({
       <label htmlFor='bathrooms' className='mb-10'>
         <span className='text-red-400'>*</span>Number of bathrooms:
         <input
-          type='number'
+          type='text'
           name='bathrooms'
           id='bathrooms'
+          maxLength={2}
+          required
           className={`${inputStyling} ${
             profileActive.bathrooms && 'border-orange-300'
           }`}
           onChange={e => {
-            handleChange(e, 'profile');
+            const valid = validateNumberOnlyInput(e.target.value);
+
+            if (valid) {
+              handleChange(e, 'profile');
+            }
           }}
           onFocus={e => {
             handleFocusState(e, true, 'profile');

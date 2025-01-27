@@ -1,6 +1,8 @@
 import React from 'react';
 import { PropertyAddress } from 'dashboard/properties/add-property/page';
 import { SectionName } from 'dashboard/properties/add-property/page';
+import validateTextOnlyInput from 'validationFunctions/validateTextOnlyInput';
+import validateTextNumInput from 'validationFunctions/validateTextNumInput';
 
 const AddPropertyAddressForm = ({
   addressInfo,
@@ -35,30 +37,45 @@ const AddPropertyAddressForm = ({
   const addressKeys = Object.keys(addressInfo) as Array<
     keyof PropertyAddress<string>
   >;
-  const formDisplay: React.JSX.Element[] = addressKeys.map(detail => (
-    <label htmlFor={detail} className='mb-10' key={detail}>
-      {requiredDetails.includes(detail) && requiredElement}
-      {displayNames[detail]}
-      <input
-        type='text'
-        name={detail}
-        id={detail}
-        value={addressInfo[detail]}
-        onChange={e => {
-          handleChange(e, 'address');
-        }}
-        onFocus={e => {
-          handleFocusState(e, true, 'address');
-        }}
-        onBlur={e => {
-          handleFocusState(e, false, 'address');
-        }}
-        className={`${
-          addressActive[detail] && 'border-orange-300'
-        } ${inputStyling}`}
-      />
-    </label>
-  ));
+  const formDisplay: React.JSX.Element[] = addressKeys.map(detail => {
+    const inputRequired: boolean = requiredDetails.includes(detail);
+    return (
+      <label htmlFor={detail} className='mb-10' key={detail}>
+        {inputRequired && requiredElement}
+        {displayNames[detail]}
+        <input
+          type='text'
+          name={detail}
+          id={detail}
+          required={inputRequired}
+          value={addressInfo[detail]}
+          maxLength={detail === 'postcode' ? 10 : 50}
+          onChange={e => {
+            const { value }: { value: string } = e.target;
+            let valid: boolean = false;
+            if (detail === 'postcode' || detail === 'nameOrNumber') {
+              valid = validateTextNumInput(value);
+            } else {
+              valid = validateTextOnlyInput(value);
+            }
+
+            if (valid) {
+              handleChange(e, 'address');
+            }
+          }}
+          onFocus={e => {
+            handleFocusState(e, true, 'address');
+          }}
+          onBlur={e => {
+            handleFocusState(e, false, 'address');
+          }}
+          className={`${
+            addressActive[detail] && 'border-orange-300'
+          } ${inputStyling}`}
+        />
+      </label>
+    );
+  });
 
   return (
     <div className='flex flex-col h-5/6 overflow-y-scroll mb-6 px-4'>

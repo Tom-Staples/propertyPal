@@ -4,6 +4,9 @@ import {
 } from 'dashboard/properties/add-property/page';
 import React from 'react';
 import { SectionName } from 'dashboard/properties/add-property/page';
+import validateCurrencyInput from 'validationFunctions/validateCurrencyInput';
+import validateDateInput from 'validationFunctions/validateDateInput';
+import validateSelectInput from 'validationFunctions/validateSelectInput';
 
 const AddPropertyFinancialForm = ({
   financialInfo,
@@ -30,14 +33,20 @@ const AddPropertyFinancialForm = ({
       <label htmlFor='purchasePrice' className='mb-10'>
         <span className='text-red-400'>*</span>Purchase Price {'(£)'}:
         <input
-          type='number'
+          type='text'
           name='purchasePrice'
           id='purchasePrice'
+          required
+          maxLength={12}
           className={`${inputStyling} ${
             financialActive.purchasePrice && 'border-orange-300'
           }`}
           onChange={e => {
-            handleChange(e, 'financial');
+            const valid: boolean = validateCurrencyInput(e.target.value);
+
+            if (valid) {
+              handleChange(e, 'financial');
+            }
           }}
           onFocus={e => {
             handleFocusState(e, true, 'financial');
@@ -55,11 +64,16 @@ const AddPropertyFinancialForm = ({
           type='date'
           name='purchaseDate'
           id='purchaseDate'
+          required
           className={`${inputStyling} ${
             financialActive.purchaseDate && 'border-orange-300'
           }`}
           onChange={e => {
-            handleChange(e, 'financial');
+            const valid: boolean = validateDateInput(e.target.value);
+
+            if (valid) {
+              handleChange(e, 'financial');
+            }
           }}
           onFocus={e => {
             handleFocusState(e, true, 'financial');
@@ -80,7 +94,11 @@ const AddPropertyFinancialForm = ({
             financialActive.purchaseFees && 'border-orange-300'
           }`}
           onChange={e => {
-            handleChange(e, 'financial');
+            const valid: boolean = validateCurrencyInput(e.target.value);
+
+            if (valid) {
+              handleChange(e, 'financial');
+            }
           }}
           onFocus={e => {
             handleFocusState(e, true, 'financial');
@@ -97,9 +115,18 @@ const AddPropertyFinancialForm = ({
         <select
           name='purchaseMethod'
           id='purchaseMethod'
+          required
           value={financialInfo.purchaseMethod}
           onChange={e => {
-            handleChange(e, 'financial');
+            const valid: boolean = validateSelectInput(e.target.value, [
+              'default',
+              'cash',
+              'mortgage'
+            ]);
+
+            if (valid) {
+              handleChange(e, 'financial');
+            }
           }}
           onFocus={e => {
             handleFocusState(e, true, 'financial');
@@ -109,7 +136,7 @@ const AddPropertyFinancialForm = ({
           }}
           className={`${
             financialActive.purchaseMethod && 'border-orange-300 border-2'
-          } mt-2 w-full p-2 outline-none rounded text-center shadow-lg bg-slate-50`}
+          } mt-2 w-full p-2 outline-none rounded text-center shadow-lg shadow-orange-300 bg-slate-50`}
         >
           <option value='default'>Please Select</option>
           <option value='cash'>Cash</option>
@@ -128,7 +155,11 @@ const AddPropertyFinancialForm = ({
                 financialActive.depositAmount && 'border-orange-300'
               }`}
               onChange={e => {
-                handleChange(e, 'financial');
+                const valid: boolean = validateCurrencyInput(e.target.value);
+
+                if (valid) {
+                  handleChange(e, 'financial');
+                }
               }}
               onFocus={e => {
                 handleFocusState(e, true, 'financial');
@@ -149,7 +180,11 @@ const AddPropertyFinancialForm = ({
                 financialActive.mortgageAmount && 'border-orange-300'
               }`}
               onChange={e => {
-                handleChange(e, 'financial');
+                const valid: boolean = validateCurrencyInput(e.target.value);
+
+                if (valid) {
+                  handleChange(e, 'financial');
+                }
               }}
               onFocus={e => {
                 handleFocusState(e, true, 'financial');
@@ -166,11 +201,16 @@ const AddPropertyFinancialForm = ({
               type='number'
               name='mortgagePayment'
               id='mortgagePayment'
+              required
               className={`${inputStyling} ${
                 financialActive.mortgagePayment && 'border-orange-300'
               }`}
               onChange={e => {
-                handleChange(e, 'financial');
+                const valid: boolean = validateCurrencyInput(e.target.value);
+
+                if (valid) {
+                  handleChange(e, 'financial');
+                }
               }}
               onFocus={e => {
                 handleFocusState(e, true, 'financial');
