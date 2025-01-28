@@ -6,46 +6,30 @@ import { useState } from 'react';
 import AddPropertyDetailsForm from '@/components/addPropertyAddressForm';
 import AddPropertyFinancialForm from '@/components/addPropertyFinancialForm';
 import AddPropertyProfileForm from '@/components/addPropertyProfileForm';
+import validateAddPropertyForm from 'validationFunctions/validateAddPropertyForm';
 
-export interface PropertyAddress<T> {
-  nameOrNumber: T;
-  postcode: T;
-  town?: T;
-  city: T;
-  county?: T;
+export interface PropertyAddress {
+  nameOrNumber: string;
+  postcode: string;
+  town?: string;
+  city: string;
+  county?: string;
 }
 export interface PropertyFinancials {
-  purchasePrice: '' | number;
-  purchaseDate: '' | Date;
-  purchaseFees?: '' | number;
+  purchasePrice: string;
+  purchaseDate: string;
+  purchaseFees?: string;
   purchaseMethod: PurchaseMethod;
-  depositAmount?: '' | number;
-  mortgageAmount?: '' | number;
-  mortgagePayment: '' | number;
-}
-export interface FinancialInputs {
-  purchasePrice: boolean;
-  purchaseDate: boolean;
-  purchaseFees: boolean;
-  purchaseMethod: boolean;
-  depositAmount: boolean;
-  mortgageAmount: boolean;
-  mortgageTerm: boolean;
-  mortgageType: boolean;
-  mortgageRate: boolean;
-  mortgagePayment: boolean;
+  depositAmount?: string;
+  mortgageAmount?: string;
+  mortgagePayment: string;
 }
 export interface PropertyProfile {
   propertyPic?: File;
   type: PropertyType;
-  bedrooms: '' | number;
-  bathrooms: '' | number;
+  bedrooms: string;
+  bathrooms: string;
   tags: string[];
-}
-export interface ProfileInputs {
-  type: boolean;
-  bedrooms: boolean;
-  bathrooms: boolean;
 }
 export type SectionName = 'address' | 'financial' | 'profile';
 export type PurchaseMethod = 'default' | 'cash' | 'mortgage';
@@ -65,7 +49,7 @@ const AddPropertyPage = () => {
   const [preview, setPreview] = useState<string>('');
 
   // Form info states
-  const [addressInfo, setAddressInfo] = useState<PropertyAddress<string>>({
+  const [addressInfo, setAddressInfo] = useState<PropertyAddress>({
     nameOrNumber: '',
     postcode: '',
     town: '',
@@ -89,32 +73,6 @@ const AddPropertyPage = () => {
     tags: []
   });
 
-  // Form active states
-  const [addressActive, setaddressActive] = useState<PropertyAddress<boolean>>({
-    nameOrNumber: false,
-    postcode: false,
-    town: false,
-    city: false,
-    county: false
-  });
-  const [financialActive, setFinancialActive] = useState<FinancialInputs>({
-    purchasePrice: false,
-    purchaseDate: false,
-    purchaseMethod: false,
-    purchaseFees: false,
-    depositAmount: false,
-    mortgageAmount: false,
-    mortgageTerm: false,
-    mortgageType: false,
-    mortgageRate: false,
-    mortgagePayment: false
-  });
-  const [profileActive, setProfileActive] = useState<ProfileInputs>({
-    type: false,
-    bedrooms: false,
-    bathrooms: false
-  });
-
   // Handlers
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -135,29 +93,6 @@ const AddPropertyPage = () => {
       setProfileInfo(prevState => ({
         ...prevState,
         [name]: value
-      }));
-    }
-  };
-  const handleFocusState = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    active: boolean,
-    sectionName: SectionName
-  ): void => {
-    const { name } = e.target;
-    if (sectionName === 'address') {
-      setaddressActive(prevState => ({
-        ...prevState,
-        [name]: active
-      }));
-    } else if (sectionName === 'financial') {
-      setFinancialActive(prevState => ({
-        ...prevState,
-        [name]: active
-      }));
-    } else {
-      setProfileActive(prevState => ({
-        ...prevState,
-        [name]: active
       }));
     }
   };
@@ -188,6 +123,10 @@ const AddPropertyPage = () => {
       }));
       setPreview('');
     }
+  };
+
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
+    e.preventDefault();
   };
 
   return (
@@ -239,35 +178,24 @@ const AddPropertyPage = () => {
             </li>
           </button>
         </ol>
-        <form
-          className='mt-10 font-bold h-5/6'
-          onSubmit={e => {
-            e.preventDefault();
-          }}
-        >
+        <form className='mt-10 font-bold h-5/6' onSubmit={handleSubmit}>
           {activeTab === 'address' && (
             <AddPropertyDetailsForm
               addressInfo={addressInfo}
-              addressActive={addressActive}
               handleChange={handleChange}
-              handleFocusState={handleFocusState}
             />
           )}
           {activeTab === 'financial' && (
             <AddPropertyFinancialForm
               financialInfo={financialInfo}
-              financialActive={financialActive}
               handleChange={handleChange}
-              handleFocusState={handleFocusState}
             />
           )}
           {activeTab === 'profile' && (
             <AddPropertyProfileForm
               profileInfo={profileInfo}
-              profileActive={profileActive}
               preview={preview}
               handleChange={handleChange}
-              handleFocusState={handleFocusState}
               handleTagClick={handleTagClick}
               handleFileChange={handleFileChange}
             />

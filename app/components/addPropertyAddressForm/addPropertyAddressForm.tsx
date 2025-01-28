@@ -6,25 +6,18 @@ import validateTextNumInput from 'validationFunctions/validateTextNumInput';
 
 const AddPropertyAddressForm = ({
   addressInfo,
-  addressActive,
-  handleChange,
-  handleFocusState
+  handleChange
 }: {
-  addressInfo: PropertyAddress<string>;
-  addressActive: PropertyAddress<boolean>;
+  addressInfo: PropertyAddress;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     sectionName: SectionName
   ) => void;
-  handleFocusState: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    active: boolean,
-    sectionName: SectionName
-  ) => void;
 }) => {
-  const inputStyling = 'mt-2 outline-none w-full bg-slate-50 border-b-2';
+  const inputStyling =
+    'mt-2 outline-none w-full bg-slate-50 border-b-2 focus:border-orange-300';
   const requiredDetails: string[] = ['nameOrNumber', 'city', 'postcode'];
-  const displayNames: PropertyAddress<string> = {
+  const displayNames: PropertyAddress = {
     nameOrNumber: 'Property Name:',
     town: 'Town:',
     city: 'City:',
@@ -34,9 +27,7 @@ const AddPropertyAddressForm = ({
   const requiredElement: React.JSX.Element = (
     <span className='text-red-400'>*</span>
   );
-  const addressKeys = Object.keys(addressInfo) as Array<
-    keyof PropertyAddress<string>
-  >;
+  const addressKeys = Object.keys(addressInfo) as Array<keyof PropertyAddress>;
   const formDisplay: React.JSX.Element[] = addressKeys.map(detail => {
     const inputRequired: boolean = requiredDetails.includes(detail);
     return (
@@ -63,15 +54,7 @@ const AddPropertyAddressForm = ({
               handleChange(e, 'address');
             }
           }}
-          onFocus={e => {
-            handleFocusState(e, true, 'address');
-          }}
-          onBlur={e => {
-            handleFocusState(e, false, 'address');
-          }}
-          className={`${
-            addressActive[detail] && 'border-orange-300'
-          } ${inputStyling}`}
+          className={inputStyling}
         />
       </label>
     );

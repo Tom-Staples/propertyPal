@@ -1,7 +1,4 @@
-import {
-  FinancialInputs,
-  PropertyFinancials
-} from 'dashboard/properties/add-property/page';
+import { PropertyFinancials } from 'dashboard/properties/add-property/page';
 import React from 'react';
 import { SectionName } from 'dashboard/properties/add-property/page';
 import validateCurrencyInput from 'validationFunctions/validateCurrencyInput';
@@ -10,23 +7,16 @@ import validateSelectInput from 'validationFunctions/validateSelectInput';
 
 const AddPropertyFinancialForm = ({
   financialInfo,
-  financialActive,
-  handleChange,
-  handleFocusState
+  handleChange
 }: {
   financialInfo: PropertyFinancials;
-  financialActive: FinancialInputs;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     sectionName: SectionName
   ) => void;
-  handleFocusState: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    active: boolean,
-    sectionName: SectionName
-  ) => void;
 }) => {
-  const inputStyling = 'mt-2 outline-none w-full bg-slate-50 border-b-2';
+  const inputStyling =
+    'mt-2 outline-none w-full bg-slate-50 border-b-2 focus:border-orange-300';
 
   return (
     <div className='flex flex-col h-5/6 overflow-y-scroll mb-6 px-4'>
@@ -38,21 +28,13 @@ const AddPropertyFinancialForm = ({
           id='purchasePrice'
           required
           maxLength={12}
-          className={`${inputStyling} ${
-            financialActive.purchasePrice && 'border-orange-300'
-          }`}
+          className={inputStyling}
           onChange={e => {
             const valid: boolean = validateCurrencyInput(e.target.value);
 
             if (valid) {
               handleChange(e, 'financial');
             }
-          }}
-          onFocus={e => {
-            handleFocusState(e, true, 'financial');
-          }}
-          onBlur={e => {
-            handleFocusState(e, false, 'financial');
           }}
           value={financialInfo.purchasePrice}
         />
@@ -65,21 +47,13 @@ const AddPropertyFinancialForm = ({
           name='purchaseDate'
           id='purchaseDate'
           required
-          className={`${inputStyling} ${
-            financialActive.purchaseDate && 'border-orange-300'
-          }`}
+          className={inputStyling}
           onChange={e => {
             const valid: boolean = validateDateInput(e.target.value);
 
             if (valid) {
               handleChange(e, 'financial');
             }
-          }}
-          onFocus={e => {
-            handleFocusState(e, true, 'financial');
-          }}
-          onBlur={e => {
-            handleFocusState(e, false, 'financial');
           }}
           value={financialInfo.purchaseDate.toLocaleString()}
         />
@@ -90,21 +64,13 @@ const AddPropertyFinancialForm = ({
           type='number'
           name='purchaseFees'
           id='purchaseFees'
-          className={`${inputStyling} ${
-            financialActive.purchaseFees && 'border-orange-300'
-          }`}
+          className={inputStyling}
           onChange={e => {
             const valid: boolean = validateCurrencyInput(e.target.value);
 
             if (valid) {
               handleChange(e, 'financial');
             }
-          }}
-          onFocus={e => {
-            handleFocusState(e, true, 'financial');
-          }}
-          onBlur={e => {
-            handleFocusState(e, false, 'financial');
           }}
           value={financialInfo.purchaseFees}
         />
@@ -128,15 +94,7 @@ const AddPropertyFinancialForm = ({
               handleChange(e, 'financial');
             }
           }}
-          onFocus={e => {
-            handleFocusState(e, true, 'financial');
-          }}
-          onBlur={e => {
-            handleFocusState(e, false, 'financial');
-          }}
-          className={`${
-            financialActive.purchaseMethod && 'border-orange-300 border-2'
-          } mt-2 w-full p-2 outline-none rounded text-center shadow-lg shadow-orange-300 bg-slate-50`}
+          className='mt-2 w-full p-2 outline-none rounded text-center shadow-lg shadow-orange-300 bg-slate-50 focus:border-orange-300 focus:border-2'
         >
           <option value='default'>Please Select</option>
           <option value='cash'>Cash</option>
@@ -151,21 +109,13 @@ const AddPropertyFinancialForm = ({
               type='number'
               name='depositAmount'
               id='depositAmount'
-              className={`${inputStyling} ${
-                financialActive.depositAmount && 'border-orange-300'
-              }`}
+              className={inputStyling}
               onChange={e => {
                 const valid: boolean = validateCurrencyInput(e.target.value);
 
                 if (valid) {
                   handleChange(e, 'financial');
                 }
-              }}
-              onFocus={e => {
-                handleFocusState(e, true, 'financial');
-              }}
-              onBlur={e => {
-                handleFocusState(e, false, 'financial');
               }}
               value={financialInfo.depositAmount}
             />
@@ -176,21 +126,13 @@ const AddPropertyFinancialForm = ({
               type='number'
               name='mortgageAmount'
               id='mortgageAmount'
-              className={`${inputStyling} ${
-                financialActive.mortgageAmount && 'border-orange-300'
-              }`}
+              className={inputStyling}
               onChange={e => {
                 const valid: boolean = validateCurrencyInput(e.target.value);
 
                 if (valid) {
                   handleChange(e, 'financial');
                 }
-              }}
-              onFocus={e => {
-                handleFocusState(e, true, 'financial');
-              }}
-              onBlur={e => {
-                handleFocusState(e, false, 'financial');
               }}
               value={financialInfo.mortgageAmount}
             />
@@ -202,21 +144,13 @@ const AddPropertyFinancialForm = ({
               name='mortgagePayment'
               id='mortgagePayment'
               required
-              className={`${inputStyling} ${
-                financialActive.mortgagePayment && 'border-orange-300'
-              }`}
+              className={inputStyling}
               onChange={e => {
                 const valid: boolean = validateCurrencyInput(e.target.value);
 
                 if (valid) {
                   handleChange(e, 'financial');
                 }
-              }}
-              onFocus={e => {
-                handleFocusState(e, true, 'financial');
-              }}
-              onBlur={e => {
-                handleFocusState(e, false, 'financial');
               }}
               value={financialInfo.mortgagePayment}
             />
