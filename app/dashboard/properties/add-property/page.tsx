@@ -73,6 +73,13 @@ const AddPropertyPage = () => {
     tags: []
   });
 
+  // Derived state
+  const formValid = validateAddPropertyForm(
+    addressInfo,
+    financialInfo,
+    profileInfo
+  );
+
   // Handlers
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -200,7 +207,12 @@ const AddPropertyPage = () => {
               handleFileChange={handleFileChange}
             />
           )}
-          <button className='bg-orange-300 py-2 px-6 rounded-lg block mx-auto'>
+          <button
+            className={`bg-orange-300 py-2 px-6 rounded-lg block mx-auto ${
+              !formValid && 'bg-gray-300'
+            }`}
+            disabled={!formValid}
+          >
             Save
           </button>
         </form>
