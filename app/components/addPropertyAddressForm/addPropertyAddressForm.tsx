@@ -40,11 +40,12 @@ const AddPropertyAddressForm = ({
           id={detail}
           required={inputRequired}
           value={addressInfo[detail]}
-          maxLength={detail === 'postcode' ? 10 : 50}
           onChange={e => {
             const { value }: { value: string } = e.target;
             let valid: boolean = false;
-            if (detail === 'postcode' || detail === 'nameOrNumber') {
+            if (detail === 'postcode') {
+              valid = validateTextNumInput(value, 8);
+            } else if (detail === 'nameOrNumber') {
               valid = validateTextNumInput(value);
             } else {
               valid = validateTextOnlyInput(value);

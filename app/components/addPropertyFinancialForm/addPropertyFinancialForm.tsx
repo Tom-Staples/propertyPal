@@ -27,7 +27,6 @@ const AddPropertyFinancialForm = ({
           name='purchasePrice'
           id='purchasePrice'
           required
-          maxLength={12}
           className={inputStyling}
           onChange={e => {
             const valid: boolean = validateCurrencyInput(e.target.value);
@@ -61,12 +60,12 @@ const AddPropertyFinancialForm = ({
       <label htmlFor='purchaseFees' className='mb-10'>
         Purchase Fees {'(£)'}:
         <input
-          type='number'
+          type='text'
           name='purchaseFees'
           id='purchaseFees'
           className={inputStyling}
           onChange={e => {
-            const valid: boolean = validateCurrencyInput(e.target.value);
+            const valid: boolean = validateCurrencyInput(e.target.value, 9);
 
             if (valid) {
               handleChange(e, 'financial');
@@ -106,12 +105,15 @@ const AddPropertyFinancialForm = ({
           <label htmlFor='depositAmount' className='mb-10'>
             Deposit Amount {'(£)'}:
             <input
-              type='number'
+              type='text'
               name='depositAmount'
               id='depositAmount'
               className={inputStyling}
               onChange={e => {
-                const valid: boolean = validateCurrencyInput(e.target.value);
+                const valid: boolean = validateCurrencyInput(
+                  e.target.value,
+                  11
+                );
 
                 if (valid) {
                   handleChange(e, 'financial');
@@ -123,7 +125,7 @@ const AddPropertyFinancialForm = ({
           <label htmlFor='mortgageAmount' className='mb-10'>
             Mortgage Amount {'(£)'}:
             <input
-              type='number'
+              type='text'
               name='mortgageAmount'
               id='mortgageAmount'
               className={inputStyling}
@@ -140,13 +142,16 @@ const AddPropertyFinancialForm = ({
           <label htmlFor='mortgagePayment' className='mb-10'>
             <span className='text-red-400'>*</span>Mortgage Payment {'(£)'}:
             <input
-              type='number'
+              type='text'
               name='mortgagePayment'
               id='mortgagePayment'
               required
               className={inputStyling}
               onChange={e => {
-                const valid: boolean = validateCurrencyInput(e.target.value);
+                const valid: boolean = validateCurrencyInput(
+                  e.target.value,
+                  10
+                );
 
                 if (valid) {
                   handleChange(e, 'financial');

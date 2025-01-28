@@ -1,3 +1,6 @@
-export default function validateCurrencyInput(input: string): boolean {
-  return !!input.match(/^\d{0,10}\.?\d{0,2}$/);
+export default function validateCurrencyInput(
+  input: string,
+  maxLength: number = 12
+): boolean {
+  return !!input.match(/^\d*\.?\d{0,2}$/) && input.length <= maxLength;
 }

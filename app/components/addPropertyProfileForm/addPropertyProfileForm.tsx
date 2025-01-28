@@ -153,11 +153,10 @@ const AddPropertyProfileForm = ({
           type='text'
           name='bedrooms'
           id='bedrooms'
-          maxLength={2}
           required
           className={inputStyling}
           onChange={e => {
-            const valid = validateNumberOnlyInput(e.target.value);
+            const valid = validateNumberOnlyInput(e.target.value, 2);
 
             if (valid) {
               handleChange(e, 'profile');
@@ -172,11 +171,10 @@ const AddPropertyProfileForm = ({
           type='text'
           name='bathrooms'
           id='bathrooms'
-          maxLength={2}
           required
           className={inputStyling}
           onChange={e => {
-            const valid = validateNumberOnlyInput(e.target.value);
+            const valid = validateNumberOnlyInput(e.target.value, 2);
 
             if (valid) {
               handleChange(e, 'profile');
