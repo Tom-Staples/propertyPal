@@ -13,6 +13,8 @@ interface RequiredFinancialNames {
   purchasePrice: string;
   purchaseDate: string;
   purchaseMethod: string;
+  depositAmount?: string;
+  mortgageAmount?: string;
   mortgagePayment?: string;
 }
 interface RequiredProfileNames {
@@ -35,6 +37,8 @@ export default function validateAddPropertyForm(
     'purchasePrice',
     'purchaseDate',
     'purchaseMethod',
+    'depositAmount',
+    'mortgageAmount',
     'mortgagePayment'
   ];
   const reqProfileNames: Array<keyof RequiredProfileNames> = [
@@ -51,15 +55,13 @@ export default function validateAddPropertyForm(
         return financialDetails[name] === 'default';
       }
       if (
-        name === 'mortgagePayment' &&
-        financialDetails.purchaseMethod === 'mortgage'
+        name === 'mortgagePayment' ||
+        name === 'depositAmount' ||
+        name === 'mortgageAmount'
       ) {
-        return financialDetails[name] === '';
-      }
-      if (
-        name === 'mortgagePayment' &&
-        financialDetails.purchaseMethod === 'cash'
-      ) {
+        if (financialDetails.purchaseMethod === 'mortgage') {
+          return financialDetails[name] === '';
+        }
         return false;
       }
       return financialDetails[name] === '';
