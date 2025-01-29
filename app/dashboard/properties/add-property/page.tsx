@@ -11,17 +11,17 @@ import validateAddPropertyForm from 'validationFunctions/validateAddPropertyForm
 export interface PropertyAddress {
   nameOrNumber: string;
   postcode: string;
-  town?: string;
+  town: string;
   city: string;
-  county?: string;
+  county: string;
 }
 export interface PropertyFinancials {
   purchasePrice: string;
   purchaseDate: string;
-  purchaseFees?: string;
+  purchaseFees: string;
   purchaseMethod: PurchaseMethod;
-  depositAmount?: string;
-  mortgageAmount?: string;
+  depositAmount: string;
+  mortgageAmount: string;
   mortgagePayment: string;
 }
 export interface PropertyProfile {
