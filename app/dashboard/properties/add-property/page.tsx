@@ -79,6 +79,17 @@ const AddPropertyPage = () => {
     financialInfo,
     profileInfo
   );
+  const postcodeValid: boolean =
+    addressInfo.postcode === '' ||
+    !!addressInfo.postcode.match(
+      /^[a-zA-z]{1,2}\d[a-zA-Z\d]?\s?\d[a-zA-Z]{1,2}$/
+    );
+  const totalEqualsPart: boolean =
+    financialInfo.purchaseMethod === 'mortgage'
+      ? Number(financialInfo.purchasePrice) ===
+        Number(financialInfo.mortgageAmount) +
+          Number(financialInfo.depositAmount)
+      : true;
 
   // Handlers
   const handleChange = (
@@ -131,7 +142,6 @@ const AddPropertyPage = () => {
       setPreview('');
     }
   };
-
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>): void => {
     e.preventDefault();
   };
@@ -194,12 +204,14 @@ const AddPropertyPage = () => {
               <AddPropertyDetailsForm
                 addressInfo={addressInfo}
                 handleChange={handleChange}
+                postcodeValid={postcodeValid}
               />
             )}
             {activeTab === 'financial' && (
               <AddPropertyFinancialForm
                 financialInfo={financialInfo}
                 handleChange={handleChange}
+                totalEqualsPart={totalEqualsPart}
               />
             )}
             {activeTab === 'profile' && (
@@ -213,11 +225,11 @@ const AddPropertyPage = () => {
             )}
             <button
               className={`py-2 px-6 rounded-lg block mx-auto ${
-                formValid
+                formValid && postcodeValid && totalEqualsPart
                   ? 'hover:scale-105 hover:opacity-90 bg-orange-300'
                   : 'bg-slate-300'
               }`}
-              disabled={!formValid}
+              disabled={!formValid || !postcodeValid || !totalEqualsPart}
             >
               Save
             </button>
