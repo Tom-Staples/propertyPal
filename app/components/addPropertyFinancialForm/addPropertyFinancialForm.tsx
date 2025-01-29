@@ -8,13 +8,15 @@ import getCurrencyDisplayValue from 'helpers/getCurrencyDisplayValue';
 
 const AddPropertyFinancialForm = ({
   financialInfo,
-  handleChange
+  handleChange,
+  totalEqualsPart
 }: {
   financialInfo: PropertyFinancials;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     sectionName: SectionName
   ) => void;
+  totalEqualsPart: boolean;
 }) => {
   const containerStyling =
     'flex mt-2 outline-none w-full bg-slate-100 rounded p-2 focus-within:border-b-2 focus-within:border-orange-300';
@@ -115,13 +117,14 @@ const AddPropertyFinancialForm = ({
       {financialInfo.purchaseMethod === 'mortgage' && (
         <>
           <label htmlFor='depositAmount' className='mb-10'>
-            Deposit Amount:
+            <span className='text-red-400'>*</span>Deposit Amount:
             <div className={containerStyling}>
               <span>£</span>
               <input
                 type='text'
                 name='depositAmount'
                 id='depositAmount'
+                required
                 className={inputStyling}
                 onChange={e => {
                   const noCommaValue: string = e.target.value
@@ -142,13 +145,14 @@ const AddPropertyFinancialForm = ({
             </div>
           </label>
           <label htmlFor='mortgageAmount' className='mb-10'>
-            Mortgage Amount:
+            <span className='text-red-400'>*</span>Mortgage Amount:
             <div className={containerStyling}>
               <span>£</span>
               <input
                 type='text'
                 name='mortgageAmount'
                 id='mortgageAmount'
+                required
                 className={inputStyling}
                 onChange={e => {
                   const noCommaValue: string = e.target.value
@@ -164,6 +168,11 @@ const AddPropertyFinancialForm = ({
                 value={getCurrencyDisplayValue(financialInfo.mortgageAmount)}
               />
             </div>
+            {!totalEqualsPart && (
+              <span className='text-red-400 text-xs'>
+                Mortgage and deposit amounts do not equal purchase price
+              </span>
+            )}
           </label>
           <label htmlFor='mortgagePayment' className='mb-10'>
             <span className='text-red-400'>*</span>Mortgage Payment:
