@@ -141,81 +141,88 @@ const AddPropertyPage = () => {
       <NavBar />
       <main className='row-span-11 row-start-2 md:col-start-4 lg:col-start-3 xl:col-start-2 md:col-span-8 lg:col-span-10 xl:col-span-9 p-2 mb-4 md:mt-8'>
         <BreadcrumbBar />
-        <ol className='flex justify-center mt-6 font-bold'>
-          <button
-            className='border-r-2 border-slate-600 px-4'
-            onClick={() => {
-              setActiveTab('address');
-            }}
-          >
-            <li
-              className={`${
-                activeTab === 'address' && 'border-b-4 border-orange-300'
-              } px-2 rounded`}
+        <div className='bg-white rounded-lg p-2 shadow-lg shadow-orange-300 w-5/6 lg:w-2/3 xl:w-2/5 mx-auto h-5/6 mt-4'>
+          <ol className='flex justify-center mt-6 font-bold flex-wrap'>
+            <button
+              className='border-r-2 border-slate-600 px-2'
+              onClick={() => {
+                setActiveTab('address');
+              }}
             >
-              Address
-            </li>
-          </button>
-          <button
-            className='border-r-2 border-slate-600 px-4'
-            onClick={() => {
-              setActiveTab('financial');
-            }}
-          >
-            <li
-              className={`${
-                activeTab === 'financial' && 'border-b-4 border-orange-300'
-              } px-2 rounded`}
+              <li
+                className={`${
+                  activeTab === 'address' && 'border-b-4 border-orange-300'
+                } px-2 rounded`}
+              >
+                Address
+              </li>
+            </button>
+            <button
+              className='border-r-2 border-slate-600 px-2'
+              onClick={() => {
+                setActiveTab('financial');
+              }}
             >
-              Financial
-            </li>
-          </button>
-          <button
-            className='px-4'
-            onClick={() => {
-              setActiveTab('profile');
-            }}
-          >
-            <li
-              className={`${
-                activeTab === 'profile' && 'border-b-4 border-orange-300'
-              } px-2 rounded`}
+              <li
+                className={`${
+                  activeTab === 'financial' && 'border-b-4 border-orange-300'
+                } px-2 rounded`}
+              >
+                Financial
+              </li>
+            </button>
+            <button
+              className='px-4'
+              onClick={() => {
+                setActiveTab('profile');
+              }}
             >
-              Profile
-            </li>
-          </button>
-        </ol>
-        <form className='mt-10 font-bold h-5/6' onSubmit={handleSubmit}>
-          {activeTab === 'address' && (
-            <AddPropertyDetailsForm
-              addressInfo={addressInfo}
-              handleChange={handleChange}
-            />
-          )}
-          {activeTab === 'financial' && (
-            <AddPropertyFinancialForm
-              financialInfo={financialInfo}
-              handleChange={handleChange}
-            />
-          )}
-          {activeTab === 'profile' && (
-            <AddPropertyProfileForm
-              profileInfo={profileInfo}
-              preview={preview}
-              handleChange={handleChange}
-              handleTagClick={handleTagClick}
-              handleFileChange={handleFileChange}
-            />
-          )}
-          <button
-            className={`bg-orange-300 py-2 px-6 rounded-lg block mx-auto ${
-              !formValid && 'bg-gray-300'
-            }`}
-            disabled={!formValid}
+              <li
+                className={`${
+                  activeTab === 'profile' && 'border-b-4 border-orange-300'
+                } px-2 rounded`}
+              >
+                Profile
+              </li>
+            </button>
+          </ol>
+          <form
+            className='mt-10 font-bold h-5/6 lg:w-3/4 lg:mx-auto'
+            onSubmit={handleSubmit}
           >
-            Save
-          </button>
-        </form>
+            {activeTab === 'address' && (
+              <AddPropertyDetailsForm
+                addressInfo={addressInfo}
+                handleChange={handleChange}
+              />
+            )}
+            {activeTab === 'financial' && (
+              <AddPropertyFinancialForm
+                financialInfo={financialInfo}
+                handleChange={handleChange}
+              />
+            )}
+            {activeTab === 'profile' && (
+              <AddPropertyProfileForm
+                profileInfo={profileInfo}
+                preview={preview}
+                handleChange={handleChange}
+                handleTagClick={handleTagClick}
+                handleFileChange={handleFileChange}
+              />
+            )}
+            <button
+              className={`py-2 px-6 rounded-lg block mx-auto ${
+                formValid
+                  ? 'hover:scale-105 hover:opacity-90 bg-orange-300'
+                  : 'bg-slate-300'
+              }`}
+              disabled={!formValid}
+            >
+              Save
+            </button>
+          </form>
+        </div>
       </main>
     </>
   );

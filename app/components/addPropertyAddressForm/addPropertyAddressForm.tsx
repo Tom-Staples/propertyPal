@@ -15,7 +15,7 @@ const AddPropertyAddressForm = ({
   ) => void;
 }) => {
   const inputStyling =
-    'mt-2 outline-none w-full bg-slate-50 border-b-2 focus:border-orange-300';
+    'mt-2 outline-none w-full bg-slate-100 rounded py-2 focus:border-b-2 focus:border-orange-300';
   const requiredDetails: string[] = ['nameOrNumber', 'city', 'postcode'];
   const displayNames: PropertyAddress = {
     nameOrNumber: 'Property Name:',

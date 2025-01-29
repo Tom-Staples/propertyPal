@@ -16,7 +16,7 @@ const AddPropertyFinancialForm = ({
   ) => void;
 }) => {
   const inputStyling =
-    'mt-2 outline-none w-full bg-slate-50 border-b-2 focus:border-orange-300';
+    'mt-2 outline-none w-full bg-slate-100 rounded py-2 focus:border-b-2 focus:border-orange-300';
 
   return (
     <div className='flex flex-col h-5/6 overflow-y-scroll mb-6 px-4'>
@@ -93,7 +93,7 @@ const AddPropertyFinancialForm = ({
               handleChange(e, 'financial');
             }
           }}
-          className='mt-2 w-full p-2 outline-none rounded text-center shadow-lg shadow-orange-300 bg-slate-50 focus:border-orange-300 focus:border-2'
+          className='mt-2 w-full py-2 outline-none rounded text-center bg-slate-100 focus:border-orange-300 focus:border-2'
         >
           <option value='default'>Please Select</option>
           <option value='cash'>Cash</option>

@@ -29,7 +29,7 @@ const AddPropertyProfileForm = ({
 }) => {
   const fileUploadRef = useRef<HTMLInputElement>(null);
   const inputStyling =
-    'mt-2 outline-none w-full bg-slate-50 border-b-2 focus:border-orange-300';
+    'mt-2 outline-none w-full bg-slate-100 py-2 rounded focus:border-b-2 focus:border-orange-300';
   const tagList: React.JSX.Element[] = [
     'Garden',
     'Driveway',
@@ -74,7 +74,12 @@ const AddPropertyProfileForm = ({
 
   return (
     <div className='flex flex-col h-5/6 overflow-y-scroll mb-6 px-4'>
-      <label htmlFor='propertyPic' className='block text-center mb-10 mx-auto'>
+      <label
+        htmlFor='propertyPic'
+        className={`block text-center mb-10 lg:w-1/2 mx-auto p-2 ${
+          !preview && 'border-2 border-dashed'
+        }`}
+      >
         {preview ? (
           <>
             <Image
@@ -82,16 +87,24 @@ const AddPropertyProfileForm = ({
               alt='Property Image Preview'
               width={400}
               height={400}
-              className='aspect-square h-auto w-auto rounded-full'
+              className='aspect-square h-auto w-auto sm:w-2/3 sm:mx-auto lg:w-full rounded-full'
             />
             <br />
-            <span className='bg-orange-300 p-2 rounded-lg'>Change Photo</span>
+            <span className='bg-orange-300 inline-block p-2 rounded-lg hover:scale-105 hover:opacity-90'>
+              Change Photo
+            </span>
           </>
         ) : (
           <>
-            <FontAwesomeIcon icon={faHouse} size='10x' className='mb-4' />
+            <FontAwesomeIcon
+              icon={faHouse}
+              size='10x'
+              className='mb-4 text-slate-100'
+            />
             <br />
-            <span className='bg-orange-300 p-2 rounded-lg'>Upload Photo</span>
+            <span className='bg-orange-300 p-2 inline-block rounded-lg hover:scale-105 hover:opacity-90'>
+              Upload Photo
+            </span>
           </>
         )}
         <input
@@ -134,7 +147,7 @@ const AddPropertyProfileForm = ({
               handleChange(e, 'profile');
             }
           }}
-          className='mt-2 w-full outline-none p-2 rounded text-center shadow-lg shadow-orange-300 bg-slate-50 focus:border-orange-300 focus:border-2'
+          className='mt-2 w-full outline-none py-2 rounded text-center bg-slate-100 focus:border-orange-300 focus:border-2'
         >
           <option value='default'>Please Select</option>
           <option value='detachedHouse'>Detached House</option>
