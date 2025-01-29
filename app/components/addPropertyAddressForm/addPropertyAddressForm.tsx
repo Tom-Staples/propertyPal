@@ -6,13 +6,15 @@ import validateTextNumInput from 'validationFunctions/validateTextNumInput';
 
 const AddPropertyAddressForm = ({
   addressInfo,
-  handleChange
+  handleChange,
+  postcodeValid
 }: {
   addressInfo: PropertyAddress;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     sectionName: SectionName
   ) => void;
+  postcodeValid: boolean;
 }) => {
   const inputStyling =
     'mt-2 outline-none w-full bg-slate-100 rounded py-2 focus:border-b-2 focus:border-orange-300';
@@ -57,6 +59,11 @@ const AddPropertyAddressForm = ({
           }}
           className={inputStyling}
         />
+        {detail === 'postcode' && !postcodeValid && (
+          <span className='text-red-400 text-xs'>
+            Postcode format is not valid
+          </span>
+        )}
       </label>
     );
   });
