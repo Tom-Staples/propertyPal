@@ -11,13 +11,7 @@ import validateSelectInput from 'validationFunctions/validateSelectInput';
 import validateNumberOnlyInput from 'validationFunctions/validateNumberOnlyInput';
 import validateImageUpload from 'validationFunctions/validateImageUpload';
 
-const AddPropertyProfileForm = ({
-  profileInfo,
-  preview,
-  handleChange,
-  handleTagClick,
-  handleFileChange
-}: {
+interface ProfileFormProps {
   profileInfo: PropertyProfile;
   preview: string;
   handleChange: (
@@ -26,25 +20,39 @@ const AddPropertyProfileForm = ({
   ) => void;
   handleTagClick: (tag: string) => void;
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}) => {
+}
+
+// Static variables
+const tagList: string[] = [
+  'Garden',
+  'Driveway',
+  'Utility',
+  'Shared',
+  'Garage',
+  'Shed',
+  'Pets',
+  'Alarm',
+  'Furnished',
+  'Open-plan',
+  'Modern',
+  'Period',
+  'Contemporary'
+];
+const inputStyling =
+  'mt-2 outline-none w-full bg-slate-100 py-2 rounded focus:border-b-2 focus:border-orange-300';
+const requiredElement: React.JSX.Element = (
+  <span className='text-red-400'>*</span>
+);
+
+const AddPropertyProfileForm = ({
+  profileInfo,
+  preview,
+  handleChange,
+  handleTagClick,
+  handleFileChange
+}: ProfileFormProps) => {
   const fileUploadRef = useRef<HTMLInputElement>(null);
-  const inputStyling =
-    'mt-2 outline-none w-full bg-slate-100 py-2 rounded focus:border-b-2 focus:border-orange-300';
-  const tagList: React.JSX.Element[] = [
-    'Garden',
-    'Driveway',
-    'Utility',
-    'Shared',
-    'Garage',
-    'Shed',
-    'Pets',
-    'Alarm',
-    'Furnished',
-    'Open-plan',
-    'Modern',
-    'Period',
-    'Contemporary'
-  ].map(tag => (
+  const displayTags: React.JSX.Element[] = tagList.map(tag => (
     <li
       key={tag}
       className={`rounded-lg p-2 mx-2 my-2 ${
@@ -124,7 +132,7 @@ const AddPropertyProfileForm = ({
         />
       </label>
       <label htmlFor='type' className='mb-10'>
-        <span className='text-red-400'>*</span>Property Type:
+        {requiredElement}Property Type:
         <br />
         <select
           name='type'
@@ -161,7 +169,7 @@ const AddPropertyProfileForm = ({
         </select>
       </label>
       <label htmlFor='bedrooms' className='mb-10'>
-        <span className='text-red-400'>*</span>Number of bedrooms:
+        {requiredElement}Number of bedrooms:
         <input
           type='text'
           name='bedrooms'
@@ -179,7 +187,7 @@ const AddPropertyProfileForm = ({
         />
       </label>
       <label htmlFor='bathrooms' className='mb-10'>
-        <span className='text-red-400'>*</span>Number of bathrooms:
+        {requiredElement}Number of bathrooms:
         <input
           type='text'
           name='bathrooms'
@@ -197,7 +205,7 @@ const AddPropertyProfileForm = ({
         />
       </label>
       <h2>Property Tags:</h2>
-      <ul className='flex flex-row flex-wrap'>{tagList}</ul>
+      <ul className='flex flex-row flex-wrap'>{displayTags}</ul>
     </div>
   );
 };

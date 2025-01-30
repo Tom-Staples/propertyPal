@@ -8,13 +8,26 @@ import useGetNotificationCounter from 'hooks/useGetNotificationCounter';
 import getIconOverlay from 'helpers/getIconOverlay';
 import isLinkActive from 'helpers/isLinkActive';
 
+interface IssueStyle {
+  spinner: string;
+  exclamation: string;
+  circle: string;
+}
+
+// Static variables
+const link: string = '/dashboard/issues';
+const issueStyle: IssueStyle = {
+  spinner: 'shrink-2 right-24 up-14',
+  exclamation: 'text-slate-600 right-24 up-14',
+  circle: 'shrink-6 right-24 up-14'
+};
+
 const IssueLink = ({
   setSideBarState = null
 }: {
   setSideBarState?: React.Dispatch<React.SetStateAction<boolean>> | null;
 }) => {
   const currentPath: string = usePathname();
-  const link: string = '/dashboard/issues';
   const linkActive = isLinkActive(currentPath, link);
   const issueCount: number | null = useGetNotificationCounter(
     'https://fakeapi.com/fakeroute'
@@ -22,11 +35,7 @@ const IssueLink = ({
   const derivedIssueDisplayValue: string =
     !issueCount || issueCount === -1 ? '' : issueCount.toString();
   const issueOverlay: React.JSX.Element | undefined = getIconOverlay(
-    {
-      spinner: 'shrink-2 right-24 up-14',
-      exclamation: 'text-slate-600 right-24 up-14',
-      circle: 'shrink-6 right-24 up-14'
-    },
+    issueStyle,
     issueCount,
     derivedIssueDisplayValue,
     'text-slate-600'

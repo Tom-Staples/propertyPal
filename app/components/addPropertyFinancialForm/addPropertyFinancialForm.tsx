@@ -6,26 +6,32 @@ import validateDateInput from 'validationFunctions/validateDateInput';
 import validateSelectInput from 'validationFunctions/validateSelectInput';
 import getCurrencyDisplayValue from 'helpers/getCurrencyDisplayValue';
 
-const AddPropertyFinancialForm = ({
-  financialInfo,
-  handleChange,
-  totalEqualsPart
-}: {
+interface FinancialFormProps {
   financialInfo: PropertyFinancials;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     sectionName: SectionName
   ) => void;
   totalEqualsPart: boolean;
-}) => {
-  const containerStyling =
-    'flex mt-2 outline-none w-full bg-slate-100 rounded p-2 focus-within:border-b-2 focus-within:border-orange-300';
-  const inputStyling = 'bg-slate-100 ml-2 grow outline-none';
+}
 
+// Static variables
+const containerStyling =
+  'flex mt-2 outline-none w-full bg-slate-100 rounded p-2 focus-within:border-b-2 focus-within:border-orange-300';
+const inputStyling = 'bg-slate-100 ml-2 grow outline-none';
+const requiredElement: React.JSX.Element = (
+  <span className='text-red-400'>*</span>
+);
+
+const AddPropertyFinancialForm = ({
+  financialInfo,
+  handleChange,
+  totalEqualsPart
+}: FinancialFormProps) => {
   return (
     <div className='flex flex-col h-5/6 overflow-y-scroll mb-6 px-4'>
       <label htmlFor='purchasePrice' className='mb-10'>
-        <span className='text-red-400 inline block'>*</span>Purchase Price:
+        {requiredElement}Purchase Price:
         <div className={containerStyling}>
           <span>£</span>
           <input
@@ -48,7 +54,7 @@ const AddPropertyFinancialForm = ({
         </div>
       </label>
       <label htmlFor='purchaseDate' className='mb-10'>
-        <span className='text-red-400'>*</span>Purchase Date:
+        {requiredElement}Purchase Date:
         <br />
         <input
           type='date'
@@ -89,7 +95,7 @@ const AddPropertyFinancialForm = ({
         </div>
       </label>
       <label htmlFor='purchaseMethod' className='mb-10'>
-        <span className='text-red-400'>*</span>Purchase Method:
+        {requiredElement}Purchase Method:
         <br />
         <select
           name='purchaseMethod'
@@ -117,7 +123,7 @@ const AddPropertyFinancialForm = ({
       {financialInfo.purchaseMethod === 'mortgage' && (
         <>
           <label htmlFor='depositAmount' className='mb-10'>
-            <span className='text-red-400'>*</span>Deposit Amount:
+            {requiredElement}Deposit Amount:
             <div className={containerStyling}>
               <span>£</span>
               <input
@@ -145,7 +151,7 @@ const AddPropertyFinancialForm = ({
             </div>
           </label>
           <label htmlFor='mortgageAmount' className='mb-10'>
-            <span className='text-red-400'>*</span>Mortgage Amount:
+            {requiredElement}Mortgage Amount:
             <div className={containerStyling}>
               <span>£</span>
               <input
@@ -175,7 +181,7 @@ const AddPropertyFinancialForm = ({
             )}
           </label>
           <label htmlFor='mortgagePayment' className='mb-10'>
-            <span className='text-red-400'>*</span>Mortgage Payment:
+            {requiredElement}Mortgage Payment:
             <div className={containerStyling}>
               <span>£</span>
               <input

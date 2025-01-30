@@ -8,7 +8,8 @@ import {
   faPeopleRoof,
   faChartLine,
   faGear,
-  faRightFromBracket
+  faRightFromBracket,
+  IconDefinition
 } from '@fortawesome/free-solid-svg-icons';
 import HamburgerLink from '@/components/hamburgerLink';
 import { useState } from 'react';
@@ -16,22 +17,33 @@ import SearchBar from '@/components/searchBar';
 import MessageLink from '../messageLink';
 import IssueLink from '../issueLink';
 
+interface Links {
+  link: string;
+  name: string;
+  icon: IconDefinition;
+}
+
+// Static Variables
+const links: Links[] = [
+  { link: '/dashboard', name: 'Overview', icon: faGripVertical },
+  { link: '/dashboard/properties', name: 'Properties', icon: faHouse },
+  { link: '/dashboard/tenants', name: 'Tenants', icon: faPeopleRoof },
+  { link: '/dashboard/analytics', name: 'Analytics', icon: faChartLine }
+];
+
 const HamburgerMenu = () => {
   const [sideBarActive, setSideBarActive] = useState<boolean>(false);
-  const links = [
-    { link: '/dashboard', name: 'Overview', icon: faGripVertical },
-    { link: '/dashboard/properties', name: 'Properties', icon: faHouse },
-    { link: '/dashboard/tenants', name: 'Tenants', icon: faPeopleRoof },
-    { link: '/dashboard/analytics', name: 'Analytics', icon: faChartLine }
-  ].map(({ link, name, icon }) => (
-    <HamburgerLink
-      link={link}
-      name={name}
-      icon={icon}
-      key={name}
-      setSideBarState={setSideBarActive}
-    />
-  ));
+  const linksDisplay: React.JSX.Element[] = links.map(
+    ({ link, name, icon }) => (
+      <HamburgerLink
+        link={link}
+        name={name}
+        icon={icon}
+        key={name}
+        setSideBarState={setSideBarActive}
+      />
+    )
+  );
 
   return (
     <div>
@@ -68,7 +80,7 @@ const HamburgerMenu = () => {
           <li className='px-2 py-4 mt-6 sm:hidden'>
             <SearchBar />
           </li>
-          {links}
+          {linksDisplay}
           <IssueLink setSideBarState={setSideBarActive} />
           <MessageLink setSideBarState={setSideBarActive} />
           <HamburgerLink

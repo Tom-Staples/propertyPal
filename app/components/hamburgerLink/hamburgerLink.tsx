@@ -6,17 +6,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { usePathname } from 'next/navigation';
 import isLinkActive from 'helpers/isLinkActive';
 
+interface HamburgerLinkProps {
+  link: string;
+  name: string;
+  icon: IconProp;
+  setSideBarState: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 const HamburgerLink = ({
   link,
   name,
   icon,
   setSideBarState
-}: {
-  link: string;
-  name: string;
-  icon: IconProp;
-  setSideBarState: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+}: HamburgerLinkProps) => {
   const currentPath: string = usePathname();
   const linkActive: boolean = isLinkActive(currentPath, link);
   return (

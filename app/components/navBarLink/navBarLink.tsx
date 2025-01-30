@@ -6,15 +6,17 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
+interface NavBarLinkProps {
+  link: string;
+  name: string;
+  icon: IconProp;
+}
+
 const NavBarLink = ({
   link,
   name,
   icon
-}: {
-  link: string;
-  name: string;
-  icon: IconProp;
-}): React.JSX.Element => {
+}: NavBarLinkProps): React.JSX.Element => {
   const currentPath: string = usePathname();
   const linkActive = isLinkActive(currentPath, link);
 

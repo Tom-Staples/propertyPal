@@ -8,13 +8,26 @@ import useGetNotificationCounter from 'hooks/useGetNotificationCounter';
 import getIconOverlay from 'helpers/getIconOverlay';
 import isLinkActive from 'helpers/isLinkActive';
 
+interface MessageStyle {
+  spinner: string;
+  exclamation: string;
+  circle: string;
+}
+
+// Static variables
+const link: string = '/dashboard/messages';
+const messageStyle: MessageStyle = {
+  spinner: 'right-10 up-4',
+  exclamation: 'right-10 up-4',
+  circle: 'shrink-4 right-20 up-14'
+};
+
 const MessageLink = ({
   setSideBarState = null
 }: {
   setSideBarState?: React.Dispatch<React.SetStateAction<boolean>> | null;
 }) => {
   const currentPath: string = usePathname();
-  const link: string = '/dashboard/messages';
   const linkActive: boolean = isLinkActive(currentPath, link);
   const messageCount: number | null = useGetNotificationCounter(
     'https://fakeData.com/fakeroutenotifs'
@@ -22,11 +35,7 @@ const MessageLink = ({
   const derivedMessageCountDisplayValue: string =
     !messageCount || messageCount === -1 ? '' : messageCount.toString();
   const messageOverlay: React.JSX.Element | undefined = getIconOverlay(
-    {
-      spinner: 'right-10 up-4',
-      exclamation: 'right-10 up-4',
-      circle: 'shrink-4 right-20 up-14'
-    },
+    messageStyle,
     messageCount,
     derivedMessageCountDisplayValue,
     'text-white'
