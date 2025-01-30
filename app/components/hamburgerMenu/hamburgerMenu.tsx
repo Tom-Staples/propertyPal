@@ -42,6 +42,11 @@ const HamburgerMenu = () => {
       >
         <FontAwesomeIcon size='2xl' icon={faBars} className='text-slate-600' />
       </button>
+      {sideBarActive && (
+        <div className='h-dvh absolute left-0 top-0 bg-slate-50 w-full p-4'>
+          <h2 className='text-lg font-bold w-fit'>Search Results...</h2>
+        </div>
+      )}
       <nav
         className={`${
           !sideBarActive && 'translate-x-52'
