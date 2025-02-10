@@ -1,15 +1,11 @@
 import React from 'react';
 import { PropertyAddress } from 'dashboard/properties/add-property/page';
-import { SectionName } from 'dashboard/properties/add-property/page';
 import validateTextOnlyInput from 'validationFunctions/validateTextOnlyInput';
 import validateTextNumInput from 'validationFunctions/validateTextNumInput';
 
 interface AddressFormProps {
   addressInfo: PropertyAddress;
-  handleChange: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    sectionName: SectionName
-  ) => void;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   postcodeValid: boolean;
 }
 
@@ -58,7 +54,7 @@ const AddPropertyAddressForm = ({
             }
 
             if (valid) {
-              handleChange(e, 'address');
+              handleChange(e);
             }
           }}
           className={inputStyling}

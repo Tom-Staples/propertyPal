@@ -3,10 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
-import {
-  PropertyProfile,
-  SectionName
-} from 'dashboard/properties/add-property/page';
+import { PropertyProfile } from 'dashboard/properties/add-property/page';
 import validateSelectInput from 'validationFunctions/validateSelectInput';
 import validateNumberOnlyInput from 'validationFunctions/validateNumberOnlyInput';
 import validateImageUpload from 'validationFunctions/validateImageUpload';
@@ -15,8 +12,7 @@ interface ProfileFormProps {
   profileInfo: PropertyProfile;
   preview: string;
   handleChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    sectionName: SectionName
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
   handleTagClick: (tag: string) => void;
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -152,7 +148,7 @@ const AddPropertyProfileForm = ({
               'industrial'
             ]);
             if (valid) {
-              handleChange(e, 'profile');
+              handleChange(e);
             }
           }}
           className='mt-2 w-full outline-none py-2 rounded text-center bg-slate-100 focus:border-orange-300 focus:border-2'
@@ -180,7 +176,7 @@ const AddPropertyProfileForm = ({
             const valid = validateNumberOnlyInput(e.target.value, 2);
 
             if (valid) {
-              handleChange(e, 'profile');
+              handleChange(e);
             }
           }}
           value={profileInfo.bedrooms}
@@ -198,7 +194,7 @@ const AddPropertyProfileForm = ({
             const valid = validateNumberOnlyInput(e.target.value, 2);
 
             if (valid) {
-              handleChange(e, 'profile');
+              handleChange(e);
             }
           }}
           value={profileInfo.bathrooms}

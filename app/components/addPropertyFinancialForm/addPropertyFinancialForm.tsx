@@ -1,6 +1,5 @@
 import { PropertyFinancials } from 'dashboard/properties/add-property/page';
 import React from 'react';
-import { SectionName } from 'dashboard/properties/add-property/page';
 import validateCurrencyInput from 'validationFunctions/validateCurrencyInput';
 import validateDateInput from 'validationFunctions/validateDateInput';
 import validateSelectInput from 'validationFunctions/validateSelectInput';
@@ -9,8 +8,7 @@ import getCurrencyDisplayValue from 'helpers/getCurrencyDisplayValue';
 interface FinancialFormProps {
   financialInfo: PropertyFinancials;
   handleChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    sectionName: SectionName
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => void;
   totalEqualsPart: boolean;
 }
@@ -46,7 +44,7 @@ const AddPropertyFinancialForm = ({
               e.target.value = noCommaValue;
 
               if (valid) {
-                handleChange(e, 'financial');
+                handleChange(e);
               }
             }}
             value={getCurrencyDisplayValue(financialInfo.purchasePrice)}
@@ -66,7 +64,7 @@ const AddPropertyFinancialForm = ({
             const valid: boolean = validateDateInput(e.target.value);
 
             if (valid) {
-              handleChange(e, 'financial');
+              handleChange(e);
             }
           }}
           value={financialInfo.purchaseDate.toLocaleString()}
@@ -87,7 +85,7 @@ const AddPropertyFinancialForm = ({
               e.target.value = noCommaValue;
 
               if (valid) {
-                handleChange(e, 'financial');
+                handleChange(e);
               }
             }}
             value={getCurrencyDisplayValue(financialInfo.purchaseFees)}
@@ -110,7 +108,7 @@ const AddPropertyFinancialForm = ({
             ]);
 
             if (valid) {
-              handleChange(e, 'financial');
+              handleChange(e);
             }
           }}
           className='mt-2 w-full py-2 outline-none rounded text-center bg-slate-100 focus:border-orange-300 focus:border-2'
@@ -143,7 +141,7 @@ const AddPropertyFinancialForm = ({
                   e.target.value = noCommaValue;
 
                   if (valid) {
-                    handleChange(e, 'financial');
+                    handleChange(e);
                   }
                 }}
                 value={getCurrencyDisplayValue(financialInfo.depositAmount)}
@@ -168,7 +166,7 @@ const AddPropertyFinancialForm = ({
                   e.target.value = noCommaValue;
 
                   if (valid) {
-                    handleChange(e, 'financial');
+                    handleChange(e);
                   }
                 }}
                 value={getCurrencyDisplayValue(financialInfo.mortgageAmount)}
@@ -201,7 +199,7 @@ const AddPropertyFinancialForm = ({
                   e.target.value = noCommaValue;
 
                   if (valid) {
-                    handleChange(e, 'financial');
+                    handleChange(e);
                   }
                 }}
                 value={getCurrencyDisplayValue(financialInfo.mortgagePayment)}

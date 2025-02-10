@@ -7,6 +7,7 @@ import AddPropertyDetailsForm from '@/components/addPropertyAddressForm';
 import AddPropertyFinancialForm from '@/components/addPropertyFinancialForm';
 import AddPropertyProfileForm from '@/components/addPropertyProfileForm';
 import validateAddPropertyForm from 'validationFunctions/validateAddPropertyForm';
+import { useUpdateForm } from 'hooks/useUpdateForm';
 
 export interface PropertyAddress {
   nameOrNumber: string;
@@ -45,33 +46,35 @@ export type PropertyType =
   | 'commercial'
   | 'industrial';
 const AddPropertyPage = () => {
-  const [activeTab, setActiveTab] = useState<string>('address');
+  const [activeTab, setActiveTab] = useState<SectionName>('address');
   const [preview, setPreview] = useState<string>('');
 
   // Form info states
-  const [addressInfo, setAddressInfo] = useState<PropertyAddress>({
+  const [addressInfo, , handleAddressChange] = useUpdateForm<PropertyAddress>({
     nameOrNumber: '',
     postcode: '',
     town: '',
     city: '',
     county: ''
   });
-  const [financialInfo, setFinancialInfo] = useState<PropertyFinancials>({
-    purchasePrice: '',
-    purchaseDate: '',
-    purchaseFees: '',
-    purchaseMethod: 'default',
-    depositAmount: '',
-    mortgageAmount: '',
-    mortgagePayment: ''
-  });
-  const [profileInfo, setProfileInfo] = useState<PropertyProfile>({
-    propertyPic: undefined,
-    type: 'default',
-    bedrooms: '',
-    bathrooms: '',
-    tags: []
-  });
+  const [financialInfo, , handleFinancialChange] =
+    useUpdateForm<PropertyFinancials>({
+      purchasePrice: '',
+      purchaseDate: '',
+      purchaseFees: '',
+      purchaseMethod: 'default',
+      depositAmount: '',
+      mortgageAmount: '',
+      mortgagePayment: ''
+    });
+  const [profileInfo, setProfileInfo, handleProfileChange] =
+    useUpdateForm<PropertyProfile>({
+      propertyPic: undefined,
+      type: 'default',
+      bedrooms: '',
+      bathrooms: '',
+      tags: []
+    });
 
   // Derived state
   const formValid = validateAddPropertyForm(
@@ -91,29 +94,6 @@ const AddPropertyPage = () => {
           Number(financialInfo.depositAmount)
       : true;
 
-  // Handlers
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    sectionName: SectionName
-  ): void => {
-    const { name, value } = e.target;
-    if (sectionName === 'address') {
-      setAddressInfo(prevState => ({
-        ...prevState,
-        [name]: value
-      }));
-    } else if (sectionName === 'financial') {
-      setFinancialInfo(prevState => ({
-        ...prevState,
-        [name]: value
-      }));
-    } else {
-      setProfileInfo(prevState => ({
-        ...prevState,
-        [name]: value
-      }));
-    }
-  };
   const handleTagClick = (tag: string): void => {
     setProfileInfo(prevState => {
       const copyActiveTags: string[] = [...prevState.tags];
@@ -203,14 +183,14 @@ const AddPropertyPage = () => {
             {activeTab === 'address' && (
               <AddPropertyDetailsForm
                 addressInfo={addressInfo}
-                handleChange={handleChange}
+                handleChange={handleAddressChange}
                 postcodeValid={postcodeValid}
               />
             )}
             {activeTab === 'financial' && (
               <AddPropertyFinancialForm
                 financialInfo={financialInfo}
-                handleChange={handleChange}
+                handleChange={handleFinancialChange}
                 totalEqualsPart={totalEqualsPart}
               />
             )}
@@ -218,7 +198,7 @@ const AddPropertyPage = () => {
               <AddPropertyProfileForm
                 profileInfo={profileInfo}
                 preview={preview}
-                handleChange={handleChange}
+                handleChange={handleProfileChange}
                 handleTagClick={handleTagClick}
                 handleFileChange={handleFileChange}
               />
